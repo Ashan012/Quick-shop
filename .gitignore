@@ -1,6 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.env
 # dependencies
 /node_modules
 /.pnp
@@ -13,6 +12,10 @@
 
 # testing
 /coverage
+
+
+# env files (can opt-in for committing if needed)
+.env*
 
 # next.js
 /.next/
@@ -40,3 +43,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.env
+.env.local
+.env.production
+.env
