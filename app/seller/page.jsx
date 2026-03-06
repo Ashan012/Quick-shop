@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
-import { AppContext, useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -34,7 +34,7 @@ const AddProduct = () => {
       const token = await getToken();
 
       const { data } = await axios.post("/api/product/add", formData, {
-        headers: { Authorization: ` Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (data.success) {
@@ -44,6 +44,7 @@ const AddProduct = () => {
         setDescription("");
         setCategory("Earphone");
         setOfferPrice("");
+        setFiles([]);
       } else {
         toast.error(data?.message);
       }

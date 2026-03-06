@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req) {
   try {
-    const { userId } = getAuth();
+    const { userId } = getAuth(req);
 
     const isSeller = await authSeller(userId);
 

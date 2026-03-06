@@ -6,6 +6,7 @@ import { useAppContext } from "@/context/AppContext";
 import Footer from "@/components/seller/Footer";
 import Loading from "@/components/Loading";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const ProductList = () => {
   const { router, getToken, user } = useAppContext();
@@ -20,6 +21,7 @@ const ProductList = () => {
       const { data } = await axios.get("/api/product/seller-list", {
         headers: { Authorization: `Bearer ${token}` },
       });
+
       if (data.success) {
         setProducts(data.products);
         setLoading(false);
@@ -27,6 +29,7 @@ const ProductList = () => {
         toast.error(data?.message);
       }
     } catch (error) {
+      console.log(error);
       toast.error(error?.message);
     }
   };
