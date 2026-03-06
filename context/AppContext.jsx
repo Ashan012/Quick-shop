@@ -25,7 +25,7 @@ export const AppContextProvider = (props) => {
 
   const fetchProductData = async () => {
     try {
-      const { data } = axios.get("/api/product/list");
+      const { data } = await axios.get("/api/product/list");
 
       if (data.success) {
         setProducts(data.products);
@@ -69,6 +69,7 @@ export const AppContextProvider = (props) => {
       cartData[itemId] = 1;
     }
     setCartItems(cartData);
+    toast.success("item added successfully");
   };
 
   const updateCartQuantity = async (itemId, quantity) => {
