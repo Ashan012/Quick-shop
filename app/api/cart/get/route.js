@@ -6,10 +6,9 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   try {
     const { userId } = getAuth(req);
-
-    const user = await User.findById(userId);
     await connectToDB();
-    const { cartItems } = user;
+    const cartItems = await User.findById(userId).select("cartItems");
+
     return NextResponse.json({ success: true, cartItems });
   } catch (error) {
     return NextResponse.json({ success: false, message: error?.message });
