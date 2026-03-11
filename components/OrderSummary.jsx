@@ -5,8 +5,17 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const OrderSummary = () => {
-  const { currency, router, getCartCount, getCartAmount, getToken } =
-    useAppContext();
+  const {
+    currency,
+    router,
+    getCartCount,
+    getCartAmount,
+    getToken,
+    user,
+    cartItems,
+    setCartItems,
+    addToCart,
+  } = useAppContext();
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -20,9 +29,12 @@ const OrderSummary = () => {
       });
       if (data.success) {
         setUserAddresses(data.addresses);
+        if (data.addresses.length > 0) {
+          setSelectedAddress(data.addresses[0]);
+        }
       }
     } catch (error) {
-      toast.error(error?.message);
+      toast.error(error?.message || "Something went wrong");
     }
   };
 
@@ -34,8 +46,10 @@ const OrderSummary = () => {
   const createOrder = async () => {};
 
   useEffect(() => {
-    fetchUserAddresses();
-  }, []);
+    if (user) {
+      fetchUserAddresses();
+    }
+  }, [user]);
 
   return (
     <div className="w-full md:w-96 bg-gray-500/5 p-5">

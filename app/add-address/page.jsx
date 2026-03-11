@@ -9,7 +9,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const AddAddress = () => {
-  const { getToken, routes } = useAppContext();
+  const { getToken, router } = useAppContext();
   const [address, setAddress] = useState({
     fullName: "",
     phoneNumber: "",
@@ -32,7 +32,8 @@ const AddAddress = () => {
       );
       console.log("address===>", data);
       if (data.success) {
-        toast.success("add address successfully");
+        toast.success(data?.message);
+        router.push("/cart");
       }
     } catch (error) {
       toast.error(error?.message);
